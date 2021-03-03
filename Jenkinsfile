@@ -6,7 +6,7 @@ node {
     //Configuration
     def gitURL = "https://github.com/julg/testJenkinsFile.git"
     def gitCredentials = ''
-    def warDir = ""
+    def warDir = "target/"
     def warName = "lnevent"
     def tomcatWebappsDir = "/usr/local/tomcat9-licencesNationales/webapps/"
     def tomcatServiceName = "tomcat9-licencesNationales.service"
