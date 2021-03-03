@@ -22,6 +22,40 @@
         <baseDir>./target/</baseDir>
     </properties>
 
+
+<!-- =========================================================== -->
+    <!--     Profile                                                 -->
+    <!-- =========================================================== -->
+    <profiles>
+        <profile>
+            <id>localhost</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profiles.active>localhost</spring.profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <spring.profiles.active>dev</spring.profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <spring.profiles.active>test</spring.profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <spring.profiles.active>prod</spring.profiles.active>
+            </properties>
+        </profile>
+    </profiles>
+	
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
