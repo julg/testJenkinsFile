@@ -257,7 +257,9 @@ node {
 
     stage('artifact') {
         try {
-            archive "${warDir}${warName}.war"
+           // archive "${warDir}${warName}.war"
+		   archive "*.war"
+
 
         } catch(e) {
             currentBuild.result = hudson.model.Result.FAILURE.toString()
@@ -323,7 +325,7 @@ node {
                         echo "--------------------------"
 
                         sh "ssh -tt ${username}@${hostname} \"rm -r ${tomcatWebappsDir}${warName} ${tomcatWebappsDir}${warName}.war\""
-                        sh "scp ${warDir}${warName}.war ${username}@${hostname}:${tomcatWebappsDir}"
+                        sh "scp *.war ${username}@${hostname}:${tomcatWebappsDir}"
                     }
                 }
             } catch(e) {
