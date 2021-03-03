@@ -6,7 +6,7 @@ node {
     //Configuration
     def gitURL = "https://github.com/julg/testJenkinsFile.git"
     def gitCredentials = ''
-    def warDir = "target/"
+    def warDir = "target"
     def warName = "lnevent"
     def tomcatWebappsDir = "/usr/local/tomcat9-licencesNationales/webapps/"
     def tomcatServiceName = "tomcat9-licencesNationales.service"
@@ -257,9 +257,7 @@ node {
 
     stage('artifact') {
         try {
-           // archive "${warDir}${warName}.war"
-		   archive "*.war"
-
+            archive "${warDir}${warName}.war"
 
         } catch(e) {
             currentBuild.result = hudson.model.Result.FAILURE.toString()
@@ -325,7 +323,7 @@ node {
                         echo "--------------------------"
 
                         sh "ssh -tt ${username}@${hostname} \"rm -r ${tomcatWebappsDir}${warName} ${tomcatWebappsDir}${warName}.war\""
-                        sh "scp *.war ${username}@${hostname}:${tomcatWebappsDir}"
+                        sh "scp ${warDir}${warName}.war ${username}@${hostname}:${tomcatWebappsDir}"
                     }
                 }
             } catch(e) {
