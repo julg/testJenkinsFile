@@ -18,7 +18,7 @@
 
     <properties>
 	   <java.version>11</java.version>
-        <finalName>lnevent-${project.artifactId}-${project.version}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
         <baseDir>./target/</baseDir>
     </properties>
 
