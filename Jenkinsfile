@@ -269,7 +269,6 @@ node {
     stage ('stop tomcat'){
         for (int i = 0; i < serverHostnames.size(); i++) { //Pour chaque serveur
             try {
-              
                     withCredentials([
                             usernamePassword(credentialsId: 'tomcatuser', passwordVariable: 'pass', usernameVariable: 'username'),
                             string(credentialsId: "${serverHostnames[i]}", variable: 'hostname'),
@@ -302,7 +301,7 @@ node {
                             sh "ssh -tt ${username}@${hostname} \"${stop} ${tomcatServiceName}\""
                         }
                     }
-         
+                
             } catch(e) {
                 currentBuild.result = hudson.model.Result.FAILURE.toString()
                 notifySlack(slackChannel,e.getLocalizedMessage())
@@ -314,7 +313,6 @@ node {
     stage ('deploy to tomcat'){
         for (int i = 0; i < serverHostnames.size(); i++) { //Pour chaque serveur
             try {
-              
                     withCredentials([
                             usernamePassword(credentialsId: 'tomcatuser', passwordVariable: 'pass', usernameVariable: 'username'),
                             string(credentialsId: "${serverHostnames[i]}", variable: 'hostname')
@@ -325,19 +323,18 @@ node {
                         sh "ssh -tt ${username}@${hostname} \"rm -fr ${tomcatWebappsDir}${warName} ${tomcatWebappsDir}${warName}.war\""
                         sh "scp ${warDir}${warName}.war ${username}@${hostname}:${tomcatWebappsDir}"
                     }
-                }
+                
             } catch(e) {
                 currentBuild.result = hudson.model.Result.FAILURE.toString()
                 notifySlack(slackChannel,e.getLocalizedMessage())
                 throw e
             }
         }
-    
+    }
 
     stage ('restart tomcat'){
         for (int i = 0; i < serverHostnames.size(); i++) { //Pour chaque serveur
             try {
-             
                     withCredentials([
                             usernamePassword(credentialsId: 'tomcatuser', passwordVariable: 'pass', usernameVariable: 'username'),
                             string(credentialsId: "${serverHostnames[i]}", variable: 'hostname'),
@@ -353,14 +350,14 @@ node {
                         echo 'get service status'
                         sh "ssh -tt ${username}@${hostname} \"${status} ${tomcatServiceName}\""
                     }
-                }
+                
             } catch(e) {
                 currentBuild.result = hudson.model.Result.FAILURE.toString()
                 notifySlack(slackChannel,e.getLocalizedMessage())
                 throw e
             }
         }
-    
+    }
 
     stage ('Artifactory configuration') {
         try {
