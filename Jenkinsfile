@@ -79,7 +79,7 @@ node {
                 serverCredentials.add('cirse1-dev-ssh-key')
 
                 serverHostnames.add('hostname.server2-dev')
-                serverCredentials.add('testnouveauvlan')
+                serverCredentials.add('testnouveauvlan2')
 
             } else if (ENV == 'TEST') {
                 serverHostnames.add('hostname.server1-test')
